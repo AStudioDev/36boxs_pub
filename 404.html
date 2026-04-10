@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <script>
+      (function () {
+        const { origin, pathname, search, hash } = window.location;
+        const segments = pathname.split("/").filter(Boolean);
+        const basePath = segments.length > 0 ? `/${segments[0]}` : "";
+        const routePath = pathname.slice(basePath.length) || "/";
+        const query = search.length > 1 ? `&q=${encodeURIComponent(search.slice(1))}` : "";
+
+        window.location.replace(`${origin}${basePath}/?p=${encodeURIComponent(routePath)}${query}${hash}`);
+      })();
+    </script>
+  </body>
+</html>
